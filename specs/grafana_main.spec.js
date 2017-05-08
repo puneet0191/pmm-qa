@@ -2,7 +2,7 @@ var graphMainDash = require('../page_objects/graphMainDash.po.js')
 var graphMariaDb = require('../page_objects/graphMariaDbDash.po.js')
 var graphDiskSpace = require('../page_objects/graphDiskSpaceDash.po.js')
 
-describe('Selenium Test Case', function() {
+describe('Cross-Server dashboards tests', function() {
   beforeEach(function () {
     graphMainDash.get(browser.baseUrl);
     browser.ignoreSynchronization = true;
@@ -19,9 +19,9 @@ describe('Selenium Test Case', function() {
   });
 
 
-  it('should check main (Cross Server Graphs) dashboard', function() {
+  it('should check all charts exist', function() {
     expect(browser.getCurrentUrl()).toContain('dashboard/db/cross-server-graphs');
-    /*expect(graphMainDash.graphPage.loadAvgChart.isDisplayed()).toBeTruthy();
+    expect(graphMainDash.graphPage.loadAvgChart.isDisplayed()).toBeTruthy();
     expect(graphMainDash.graphPage.memUsgChart.isDisplayed()).toBeTruthy();
     expect(graphMainDash.graphPage.mysqlConnChart.isDisplayed()).toBeTruthy();
     expect(graphMainDash.graphPage.mysqlQueryChart.isDisplayed()).toBeTruthy();
@@ -29,6 +29,6 @@ describe('Selenium Test Case', function() {
     expect(graphMainDash.graphPage.netTrafChart.isDisplayed()).toBeTruthy();
     expect(graphMainDash.graphPage.sysInfoChart.isDisplayed()).toBeTruthy();
     expect(graphMainDash.graphPage.mysqlInfoChart.isDisplayed()).toBeTruthy();
-  */});
- 
+  });
+
 });

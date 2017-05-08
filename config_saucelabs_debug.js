@@ -1,6 +1,10 @@
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 var reporter = new HtmlScreenshotReporter({
+  pathBuilder: function(currentSpec, suites, browserCapabilities) {
+    // will return chrome/your-spec-name.png
+     return browserCapabilities.get('browserName') + '/' + currentSpec.fullName;
+  },
   dest: 'screenshots',
   filename: 'pmm-test-report.html',
   captureOnlyFailedSpecs: true
@@ -65,42 +69,43 @@ exports.config = {
     platform: 'ANY'
   },
   */
-
-  multiCapabilities: [{
+multiCapabilities: [{
+  'browserName': 'firefox',
+  'platform': 'OS X 10.12',
+  'name': "firefox-osx",
+  'maxSessions': 3
+}, {
+  'browserName': 'chrome',
+  'platform': 'Linux',
+  'name': "chrome_57-linux",
+  'maxSessions': 3
+}, {
+  'browserName': 'internet explorer',
+  'platform': 'Windows 8.1',
+  'name': "ie-win8.1",
+  'maxSessions': 3
+  /*multiCapabilities: [{
     browserName: 'firefox',
-    version: '32',
-    platform: 'OS X 10.10',
-    name: "firefox-osx",
-    maxInstances: 2
+    version: '',
+    platform: 'OS X 10.12',
+    name: "firefox-osx"
   }, { 
     browserName: 'chrome',
-    version: '57',
+    version: '',
     platform: 'OS X 10.12',
     name: "chrome_57-osx",
-    shardTestFiles: true,
-    screenResolution: '1920x1440',
-    maxInstances: 2
-  /*}, {
+  }, {
     browserName: 'internet explorer',
-    version: '11.103',
-    platform: 'Windows 10',
+    version: '',
+    platform: 'Windows 8.1',
     name: "windows_10-ie_11",
-    screenResolution: '1600x1200',
-  }, {
-    browserName: 'opera',
-    version: '12.15',
-    platform: 'Linux',
-    name: "Linux-opera_12",
-    screenResolution: '1024x768',
-  }, {
-    browserName: 'firefox',
-    version: '45.0',
-    platform: 'Linux',
-    name: "Linux-ff_45",
-    screenResolution: '1024x768',
-    */
-
-}],
+  /*capabilities: {
+    browserName: 'internet explorer',
+    version: '',
+    name: 'ie',
+    platform: 'Windows 8.1'
+},
+*/}],
  
   // -----------------------------------------------------------------
   // Browser and Capabilities: Chrome
@@ -126,7 +131,7 @@ exports.config = {
  
   // The timeout for each script run on the browser. This should be longer
   // than the maximum time your application needs to stabilize between tasks.
-  allScriptsTimeout: 100000,
+  allScriptsTimeout: 200000,
   framework: "jasmine2",
  
   /**
@@ -145,24 +150,24 @@ exports.config = {
   onPrepare: function() {
     // At this point, global 'protractor' object will be set up, and
     // jasmine will be available.
-  /*  var caps = browser.getCapabilities();
+    var caps = browser.getCapabilities();
 
     var width = 1600;
     var height = 1200;
     var jasmineReporters = require('jasmine-reporters');
     browser.driver.manage().window().setSize(width, height);
     //browser.driver.manage().window().maximize();
-    jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+    /*jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
         consolidateAll: true,
         savePath: 'testresults',
         filePrefix: 'xmloutput'
     }));
 
     jasmine.getEnv().addReporter(reporter);
-        browser.manage().timeouts().pageLoadTimeout(90000);
+  */browser.manage().timeouts().pageLoadTimeout(100000);
     browser.manage().timeouts().implicitlyWait(100000);
-  */
-      var jasmineReporters = require('jasmine-reporters');
+  
+//      var jasmineReporters = require('jasmine-reporters');
 
     // returning the promise makes protractor wait for the reporter config before executing tests
     return browser.getProcessedConfig().then(function(config) {
@@ -181,7 +186,9 @@ exports.config = {
             }
         });
         jasmine.getEnv().addReporter(junitReporter);
+        jasmine.getEnv().addReporter(reporter);
     });
+
   },
 
     onComplete: function () {

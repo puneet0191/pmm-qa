@@ -1,7 +1,7 @@
 var graphMainDash = require('../page_objects/graphMainDash.po.js')
 var graphDiskSpace = require('../page_objects/graphDiskSpaceDash.po.js')
 
-describe('Selenium Test Case', function() {
+describe('Disk Space dashboards tests', function() {
   beforeEach(function () {
     graphMainDash.get(browser.baseUrl);
     browser.ignoreSynchronization = true;
@@ -19,20 +19,19 @@ describe('Selenium Test Case', function() {
 
   });
 
-  it('should check Disk Space dashboard', function() {
-/*    graphMainDash.clickOpenSearch();
+  it('should check charts titles', function() {
+    graphMainDash.clickOpenSearch();
     graphMainDash.searchDashboard("Disk Space");
- browser.ignoreSynchronization = false;    
-elem = element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Mountpoint Usage"]'));
-    browser.wait(function() {
-    return browser.isElementPresent(elem);
+    elem = element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Mountpoint Usage"]'));
+ /*   browser.wait(function() {
+       return browser.isElementPresent(elem);
     }, 130000);
 
-expect(browser.isElementPresent(elem)).toBeTruthy();    
-browser.sleep(75000);   
+    expect(browser.isElementPresent(elem)).toBeTruthy();    
+    browser.sleep(75000);   
     text = element(by.tagName('html')).getText();
     expect(text).toContain("" + "Mountpoint Usage");
-    /*expect(graphDiskSpace.getHostnameTitle().isDisplayed()).toBeTruthy();
+    expect(graphDiskSpace.getHostnameTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getMntPntUsgTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getMntPntTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getHostsTitle().isDisplayed()).toBeTruthy();
@@ -41,6 +40,6 @@ browser.sleep(75000);
     expect(graphDiskSpace.getConsulTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getPromethTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getMysqlTitle().isDisplayed()).toBeTruthy();
- */});
+*/ });
 
 });
