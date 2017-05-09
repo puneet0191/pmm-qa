@@ -126,7 +126,7 @@ exports.config = {
  
   // The timeout for each script run on the browser. This should be longer
   // than the maximum time your application needs to stabilize between tasks.
-  allScriptsTimeout: 105000,
+  allScriptsTimeout: 100000,
   framework: "jasmine2",
  
   /**
@@ -145,7 +145,7 @@ exports.config = {
   onPrepare: function() {
     // At this point, global 'protractor' object will be set up, and
     // jasmine will be available.
- var caps = browser.getCapabilities();
+    var caps = browser.getCapabilities();
 
     var width = 1600;
     var height = 1200;
@@ -159,8 +159,8 @@ exports.config = {
     }));
 
     jasmine.getEnv().addReporter(reporter);
-        browser.manage().timeouts().pageLoadTimeout(120000);
-    browser.manage().timeouts().implicitlyWait(65000);
+        browser.manage().timeouts().pageLoadTimeout(90000);
+    browser.manage().timeouts().implicitlyWait(100000);
   },
 
     onComplete: function () {
@@ -193,7 +193,7 @@ exports.config = {
     includeStackTrace: true,
     // Default time to wait in ms before a test fails.
     defaultTimeoutInterval: 100000,
-    idleTimeout: 100
+   // idleTimeout: 100
   }
 
 };

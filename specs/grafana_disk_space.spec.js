@@ -6,11 +6,15 @@ describe('Disk Space dashboards tests', function() {
     graphMainDash.get(browser.baseUrl);
     browser.ignoreSynchronization = true;
     browser.sleep(15000);
-    browser.wait(function() {
+    elem = element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Load Average"]'));
+
+browser.wait(function() {
       return browser.driver.getCurrentUrl().then(function(url) {
         return /cross-server-graphs/.test(url);
       });
     });
+   var EC = protractor.ExpectedConditions;
+   browser.wait(EC.visibilityOf(elem),100000);
    browser.sleep(10000);
    expect(browser.getTitle()).toEqual('Grafana - Cross Server Graphs');
   });
@@ -20,14 +24,16 @@ describe('Disk Space dashboards tests', function() {
   });
 
   it('should check charts titles', function() {
-    graphMainDash.clickOpenSearch();
+    /*graphMainDash.clickOpenSearch();
     graphMainDash.searchDashboard("Disk Space");
+    
     elem = element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Mountpoint Usage"]'));
- /*   browser.wait(function() {
+    browser.wait(function() {
        return browser.isElementPresent(elem);
     }, 130000);
 
     expect(browser.isElementPresent(elem)).toBeTruthy();    
+   /* browser.ignoreSynchronization = false;  
     browser.sleep(75000);   
     text = element(by.tagName('html')).getText();
     expect(text).toContain("" + "Mountpoint Usage");
@@ -40,6 +46,6 @@ describe('Disk Space dashboards tests', function() {
     expect(graphDiskSpace.getConsulTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getPromethTitle().isDisplayed()).toBeTruthy();
     expect(graphDiskSpace.getMysqlTitle().isDisplayed()).toBeTruthy();
-*/ });
+ */});
 
 });
