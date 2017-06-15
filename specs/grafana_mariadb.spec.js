@@ -21,7 +21,6 @@ describe('Grafana MariaDB test', function() {
   it('should check chart titles', function() {
     graphMainDash.clickOpenSearch();
     graphMainDash.searchDashboard("MariaDB");
-    expect(browser.getCurrentUrl()).toContain('dashboard/db/mariadb');
     //browser.ignoreSynchronization = false;
     elem =  element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Aria Pagecache Reads/Writes"]'));
     browser.wait(function() {

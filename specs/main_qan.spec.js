@@ -25,7 +25,6 @@ describe('Main QAN Page', function () {
   it('should click on each instances in menu list', function() {
     mainQANPage.clickInstancesMenu();
     mainQANPage.clickEachInstance();
-    //console.log('Count = ' + mainQANPage.returnInstancesCount());
 
   });
 

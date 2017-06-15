@@ -11,6 +11,7 @@ describe('MongoMMVAP1 Dashboards tests', function() {
         return /cross-server-graphs/.test(url);
       });
     });
+       console.log('BeforeEach Mongo');
   });
 
   afterEach(function () {
@@ -22,6 +23,8 @@ describe('MongoMMVAP1 Dashboards tests', function() {
     graphMainDash.clickOpenSearch();
     graphMainDash.searchDashboard("MongoDB MMAPv1");
     expect(browser.getCurrentUrl()).toContain('dashboard/db/mongodb-mmapv1');
+    console.log('It block for Mongo');
+        
     browser.sleep(25000);
     /*expect(graphPO.ariaPageCacheTitle().isDisplayed()).toBeTruthy();
     expect(graphMariaDb.ariaTransactTitle().isDisplayed()).toBeTruthy();

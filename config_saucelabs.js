@@ -17,12 +17,8 @@ exports.config = {
   //
   // Note that this server must have chromedriver in its path for Chromium
   // tests to work.
- //seleniumAddress: 'http://localhost:4444/wd/hub',
+  //seleniumAddress: 'http://localhost:4444/wd/hub',
   //seleniumAddress: 'http://ondemand.saucelabs.com:80/wd/hub',
-  // seleniumAddress for Crossbrowsertesting
-  //  seleniumAddress: 'http://your_mail:your_key@hub.crossbrowsertesting.com:80/wd/hub',
-//  sauceUser: process.env.SAUCE_USERNAME,
-//  sauceKey: process.env.SAUCE_ACCESS_KEY, 
   // -----------------------------------------------------------------
   // Specify the test code that will run.
   // -----------------------------------------------------------------
@@ -33,8 +29,9 @@ exports.config = {
   //],
 
   suites: {
-    mainQanPage: 'specs/main_qan.spec.js',
-    grafana: 'specs/grafana*.spec.js',
+    //mainQanPage: 'specs/main_qan.spec.js',
+    grafanaCreate: 'specs/grafana_prepare_upgrade.spec.js',
+    //grafanaMongo: 'specs/grafana_mongodb_mmvap.spec.js',
 //    managementPage: 'management_page/*spec.js',
   },
 
@@ -58,14 +55,19 @@ exports.config = {
   //
   // It is also hard to pass through needed command line parameters.
  
-  /*
+  
   capabilities: {
-    browserName: 'phantomjs',
+    browserName: 'microsoftedge',
     version: '',
-    platform: 'ANY'
+    idleTimeout: 9999,
+    avoidProxy: true,
+    username: process.env.SAUCE_USERNAME,
+    maxDuration: 660,
+    screenResolution: '1600x1200',
+    platform: 'Windows 10'
   },
-  */
-
+  
+/*
   multiCapabilities: [{
     browserName: 'firefox',
     version: '32',
@@ -80,7 +82,7 @@ exports.config = {
     shardTestFiles: true,
     screenResolution: '1920x1440',
     maxInstances: 2
-  /*}, {
+  }, {
     browserName: 'internet explorer',
     version: '11.103',
     platform: 'Windows 10',
@@ -98,9 +100,9 @@ exports.config = {
     platform: 'Linux',
     name: "Linux-ff_45",
     screenResolution: '1024x768',
-    */
+    
 
-}],
+}],*/
  
   // -----------------------------------------------------------------
   // Browser and Capabilities: Chrome
@@ -126,7 +128,8 @@ exports.config = {
  
   // The timeout for each script run on the browser. This should be longer
   // than the maximum time your application needs to stabilize between tasks.
-  allScriptsTimeout: 100000,
+  allScriptsTimeout: 300000,
+  getPageTimeout: 300000,
   framework: "jasmine2",
  
   /**
@@ -145,12 +148,16 @@ exports.config = {
   onPrepare: function() {
     // At this point, global 'protractor' object will be set up, and
     // jasmine will be available.
+    require('./common/waitReady.js');
     var caps = browser.getCapabilities();
 
     var width = 1600;
     var height = 1200;
     var jasmineReporters = require('jasmine-reporters');
     browser.driver.manage().window().setSize(width, height);
+    browser.manage().timeouts().pageLoadTimeout(300000);
+    browser.manage().timeouts().implicitlyWait(300000);
+
     //browser.driver.manage().window().maximize();
     jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
         consolidateAll: true,
@@ -159,8 +166,6 @@ exports.config = {
     }));
 
     jasmine.getEnv().addReporter(reporter);
-        browser.manage().timeouts().pageLoadTimeout(90000);
-    browser.manage().timeouts().implicitlyWait(100000);
   },
 
     onComplete: function () {
@@ -192,7 +197,8 @@ exports.config = {
     // If true, include stack traces in failures.
     includeStackTrace: true,
     // Default time to wait in ms before a test fails.
-    defaultTimeoutInterval: 100000,
+    defaultTimeoutInterval: 300000,
+   // print: function () {},
    // idleTimeout: 100
   }
 
