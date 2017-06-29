@@ -29,10 +29,22 @@ describe('Prepare upgrade tests', function() {
         return n;  
       });
     });
-    graphMainDash.savePageAs(data['new_dashboard']);
+    graphMainDash.saveDashboardAs(data['new_dashboard']);
     graphMainDash.graphPage.openSearch.click().then(function() {
       expect(graphMainDash.countDashboards()).toEqual(n+1);
     });
  });
 
-});
+  it('should delete dashboard', function() {
+    var n;
+    graphMainDash.graphPage.openSearch.click().then(function() {
+      graphMainDash.countDashboards().then(function(count) {
+        n = count;
+        console.log(count);
+        return n;  
+      });
+    });
+    //graphMainDash.deleteDashboard(data['new_dashboard']);
+
+  });
+})
