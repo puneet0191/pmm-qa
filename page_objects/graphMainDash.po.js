@@ -2,8 +2,9 @@
 
 module.exports = {
   graphPage: {
-    openSearch: element(by.linkText('Cross Server Graphs')),
-    searchFld: element(by.css('placeholder="Find dashboards by name"')),
+    openSearch: element(by.css('[ng-click="openSearch()"]')),
+    listDashboards: element.all(by.repeater('row in ctrl.results')),
+    searchFld: element(by.css('ng-model="ctrl.query.query"')),
     loadAvgChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Load Average"]')),
     memUsgChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Memory Usage"]')),
     mysqlConnChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "MySQL Connections"]')),
@@ -28,9 +29,9 @@ module.exports = {
     },
 
     searchDashboard: function(name) {
-      this.graphPage.searchFld.sendKeys(name);
-      browser.sleep(5000);
-      element(by.xpath("//span[@class='search-result-link']//span[.='" + name + "']")).click();
+      this.graphPage.searchFld.sendKeys(name).then(function() {
+        element(by.xpath("//span[@class='search-result-link']//span[.='" + name + "']")).click();
+      });
     },
 
     savePageAs: function(newDashboard) {
@@ -45,4 +46,8 @@ module.exports = {
         });
       });
    },
+
+    countDashboards: function() {
+       return this.graphPage.listDashboards.count();
+    }
 };
