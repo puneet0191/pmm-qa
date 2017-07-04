@@ -1,6 +1,6 @@
 var graphMainDash = require('../page_objects/graphMainDash.po.js')
 var data = require('../test_data/grafana_data.json')
-
+var random = require('../common/utils.js')
 
 describe('Prepare upgrade tests', function() {
   beforeEach(function () {
@@ -23,15 +23,19 @@ describe('Prepare upgrade tests', function() {
 
   it('should copy dashboard', function() {
     var n;
-    graphMainDash.graphPage.openSearch.click().then(function() {
+    var new_dashboard = data['new_dashboard'] + random.getRandomString(4);
+
+ /*   graphMainDash.graphPage.openSearch.click().then(function() {
       graphMainDash.countDashboards().then(function(count) {
         n = count;
         return n;  
       });
     });
-    graphMainDash.saveDashboardAs(data['new_dashboard']);
-    graphMainDash.graphPage.openSearch.click().then(function() {
-      expect(graphMainDash.countDashboards()).toEqual(n+1);
+*/
+    graphMainDash.saveDashboardAs(new_dashboard);
+      graphMainDash.graphPage.openSearchTxt.getText().then(function(text) {
+        expect(text).toEqual(new_dashboard);
+    
     });
  });
 
@@ -40,10 +44,10 @@ describe('Prepare upgrade tests', function() {
     graphMainDash.graphPage.openSearch.click().then(function() {
       graphMainDash.countDashboards().then(function(count) {
         n = count;
-        console.log(count);
         return n;  
       });
     });
+  
     //graphMainDash.deleteDashboard(data['new_dashboard']);
 
   });

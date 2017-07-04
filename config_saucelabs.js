@@ -56,53 +56,53 @@ exports.config = {
   // It is also hard to pass through needed command line parameters.
  
   
-  capabilities: {
+/*  capabilities: {
     browserName: 'microsoftedge',
     version: '',
     idleTimeout: 9999,
     avoidProxy: true,
     username: process.env.SAUCE_USERNAME,
-    maxDuration: 660,
+    maxDuration: 760,
     screenResolution: '1600x1200',
     platform: 'Windows 10'
   },
-  
-/*
+*/  
+
   multiCapabilities: [{
-    browserName: 'firefox',
-    version: '32',
-    platform: 'OS X 10.10',
-    name: "firefox-osx",
-    maxInstances: 2
+    browserName: 'microsoftedge',
+    version: '',
+    idleTimeout: 9999,
+    avoidProxy: true,
+    //username: process.env.SAUCE_USERNAME,
+    maxDuration: 760,
+    screenResolution: '1600x1200',
+    platform: 'Windows 10'
   }, { 
     browserName: 'chrome',
     version: '57',
-    platform: 'OS X 10.12',
-    name: "chrome_57-osx",
+    platform: 'Windows 10',
+    name: "chrome_57-windows",
+    avoidProxy: true,
+    idleTimeout: 9999,
     shardTestFiles: true,
-    screenResolution: '1920x1440',
+    screenResolution: '1600x1200',
     maxInstances: 2
   }, {
-    browserName: 'internet explorer',
-    version: '11.103',
-    platform: 'Windows 10',
-    name: "windows_10-ie_11",
-    screenResolution: '1600x1200',
-  }, {
-    browserName: 'opera',
+   /* browserName: 'opera',
     version: '12.15',
     platform: 'Linux',
     name: "Linux-opera_12",
     screenResolution: '1024x768',
-  }, {
+  }, {*/
     browserName: 'firefox',
-    version: '45.0',
+    version: '',
     platform: 'Linux',
+    avoidProxy: true,
+    idleTimeout: 9999,
     name: "Linux-ff_45",
-    screenResolution: '1024x768',
-    
+    screenResolution: '1024x768'
 
-}],*/
+}],
  
   // -----------------------------------------------------------------
   // Browser and Capabilities: Chrome

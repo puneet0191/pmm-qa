@@ -3,6 +3,7 @@
 module.exports = {
   graphPage: {
     openSearch: element(by.css('[ng-click="openSearch()"]')),
+    openSearchTxt: element(by.xpath('//*[@ng-click="openSearch()"]/span')),
     listDashboards: element.all(by.repeater('row in ctrl.results')),
     searchFld: element(by.css('ng-model="ctrl.query.query"')),
     loadAvgChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Load Average"]')),
