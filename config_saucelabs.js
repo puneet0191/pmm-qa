@@ -31,7 +31,7 @@ exports.config = {
   suites: {
     //mainQanPage: 'specs/main_qan.spec.js',
     grafanaCreate: 'specs/grafana_prepare_upgrade.spec.js',
-    //grafanaMongo: 'specs/grafana_mongodb_mmvap.spec.js',
+    grafana: 'specs/grafana_mongodb_mmvap.spec.js',
 //    managementPage: 'management_page/*spec.js',
   },
 
@@ -73,7 +73,7 @@ exports.config = {
     version: '',
     idleTimeout: 9999,
     avoidProxy: true,
-    //username: process.env.SAUCE_USERNAME,
+    name: "microsoftedge-windows-10",
     maxDuration: 760,
     screenResolution: '1600x1200',
     platform: 'Windows 10'
@@ -88,12 +88,16 @@ exports.config = {
     screenResolution: '1600x1200',
     maxInstances: 2
   }, {
-   /* browserName: 'opera',
-    version: '12.15',
-    platform: 'Linux',
-    name: "Linux-opera_12",
-    screenResolution: '1024x768',
-  }, {*/
+    browserName: 'chrome',
+    version: '59',
+    platform: 'Mac 10.12',
+    name: "chrome_59-mac-10.12",
+    avoidProxy: true,
+    idleTimeout: 9999,
+    shardTestFiles: true,
+    screenResolution: '1920x1440',
+    maxInstances: 2
+  }, {
     browserName: 'firefox',
     version: '',
     platform: 'Linux',
