@@ -5,7 +5,7 @@ module.exports = {
     openSearch: element(by.css('[ng-click="openSearch()"]')),
     openSearchTxt: element(by.xpath('//*[@ng-click="openSearch()"]/span')),
     listDashboards: element.all(by.repeater('row in ctrl.results')),
-    searchFld: element(by.css('ng-model="ctrl.query.query"')),
+    searchFld: element(by.css('[ng-model="ctrl.query.query"]')),
     loadAvgChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Load Average"]')),
     memUsgChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "Memory Usage"]')),
     mysqlConnChart: element(by.xpath('//span[contains(@class, "panel-title-text drag-handle") and (text()) = "MySQL Connections"]')),
@@ -32,7 +32,8 @@ module.exports = {
 
     searchDashboard: function(name) {
       return this.graphPage.searchFld.sendKeys(name).then(function() {
-          element(by.xpath("//span[@class='search-result-link']//span[.='" + name + "']")).click();
+        console.log("Found!")  
+        element(by.xpath("//span[@class='search-result-link']//span[.='" + name + "']")).click();
       });
     },
 

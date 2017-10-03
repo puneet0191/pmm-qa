@@ -15,17 +15,25 @@ describe('MongoMMVAP1 Dashboards tests', function() {
   });
 
   afterEach(function () {
-
+  /* browser.switchTo().alert().accept().then(null, function(e) {
+       if (e.code !== webdriver.ErrorCode.NO_SUCH_ALERT) {
+           throw e;
+             }
+   });*/
+    browser.switchTo().alert().then(function (alert) { 
+      alert.dismiss();},
+        function (err) {}
+    );
   });
 
 
   it('should check charts titles', function() {
-    graphMainDash.clickOpenSearch();
-    graphMainDash.searchDashboard("MongoDB MMAPv1");
-    expect(browser.getCurrentUrl()).toContain('dashboard/db/mongodb-mmapv1');
-    console.log('It block for Mongo');
-        
-    browser.sleep(25000);
+    graphMainDash.clickOpenSearch().then(function() {
+      graphMainDash.searchDashboard("MongoDB MMAPv1").then(function() {
+        expect(browser.getCurrentUrl()).toContain('dashboard/db/mongodb-mmapv1');
+        console.log('It block for Mongo');
+      }); 
+    });
     /*expect(graphPO.ariaPageCacheTitle().isDisplayed()).toBeTruthy();
     expect(graphMariaDb.ariaTransactTitle().isDisplayed()).toBeTruthy();
     expect(graphMariaDb.ariaPageTitle().isDisplayed()).toBeTruthy();
