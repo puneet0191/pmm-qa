@@ -24,22 +24,14 @@ describe('Prepare upgrade tests', function() {
   it('should copy dashboard', function() {
     var n;
     var new_dashboard = data['new_dashboard'] + random.getRandomString(4);
-
- /*   graphMainDash.graphPage.openSearch.click().then(function() {
-      graphMainDash.countDashboards().then(function(count) {
-        n = count;
-        return n;  
-      });
-    });
-*/
+    var alertElement = element(by.css('.alert-success'));
     graphMainDash.saveDashboardAs(new_dashboard);
-      graphMainDash.graphPage.openSearchTxt.getText().then(function(text) {
-        expect(text).toEqual(new_dashboard);
-    
+    browser.wait(protractor.ExpectedConditions.visibilityOf(alertElement), 10000).then(function(){ 
+      expect(alertElement.isDisplayed()).toBe(true);
     });
  });
 
-  it('should delete dashboard', function() {
+  xit('should delete dashboard', function() {
     var n;
     graphMainDash.graphPage.openSearch.click().then(function() {
       graphMainDash.countDashboards().then(function(count) {
@@ -48,7 +40,7 @@ describe('Prepare upgrade tests', function() {
       });
     });
   
-    //graphMainDash.deleteDashboard(data['new_dashboard']);
+    graphMainDash.deleteDashboard(data['new_dashboard']);
 
   });
 })
