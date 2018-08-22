@@ -13,7 +13,7 @@ modules:
     config:
         WebDriver:
             url: 'http://localhost:8080'     # the url that points to the joomla installation at /tests/system/joomla-cms
-            host: 'pmm_qa:a965f590-d452-429d-a484-3aca621de8f5@ondemand.saucelabs.com'
+            host: '<username><token>@ondemand.saucelabs.com'
             port: 4444
             browser: chrome
             window_size: false
