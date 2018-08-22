@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+    enabled:
+        - AcceptanceHelper
+        - Asserts
+        - WebDriver
+    config:
+        WebDriver:
+            url: 'http://localhost:8080'     # the url that points to the joomla installation at /tests/system/joomla-cms
+            host: 'pmm_qa:a965f590-d452-429d-a484-3aca621de8f5@ondemand.saucelabs.com'
+            port: 4448
+            browser: chrome
+            window_size: false
+            restart: false
+            capabilities:
+              chromeOptions:
+                args: ["--disable-gpu", "--no-sandbox", "window-size=1920x1080"]
+                binary: "/usr/bin/google-chrome"
+              platform: 'Windows 10'
+error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED"
